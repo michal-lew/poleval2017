@@ -1,0 +1,10 @@
+\begin{thebibliography}{1}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+
+\bibitem[De~Marneffe et~al., 2014]{de2014universal}
+De~Marneffe, Marie-Catherine, Timothy Dozat, Natalia Silveira, Katri Haverinen,
+  Filip Ginter, Joakim Nivre, and Christopher~D Manning, 2014.
+\newblock Universal stanford dependencies: A cross-linguistic typology.
+\newblock In {\em LREC\/}, volume~14.
+
+\end{thebibliography}
