@@ -1,0 +1,97 @@
+\begin{thebibliography}{14}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+
+\bibitem[Aceda{\'n}ski, 2010]{acedanski2010morphosyntactic}
+Aceda{\'n}ski, Szymon, 2010.
+\newblock A morphosyntactic brill tagger for inflectional languages.
+\newblock In {\em International Conference on Natural Language Processing\/}.
+  Springer.
+
+\bibitem[Broda et~al., 2012]{broda2012kpwr}
+Broda, Bartosz, Micha{\l} Marcinczuk, Marek Maziarz, Adam Radziszewski, and
+  Adam Wardynski, 2012.
+\newblock Kpwr: Towards a free corpus of polish.
+\newblock In {\em Proceedings of LREC\/}, volume~12.
+
+\bibitem[Brown et~al., 1992]{Brown:1992:CNG:176313.176316}
+Brown, Peter~F., Peter~V. deSouza, Robert~L. Mercer, Vincent J.~Della Pietra,
+  and Jenifer~C. Lai, 1992.
+\newblock Class-based n-gram models of natural language.
+\newblock {\em Comput. Linguist.\/}, 18(4):467--479.
+
+\bibitem[Collins, 2002]{Collins:2002:DTM:1118693.1118694}
+Collins, Michael, 2002.
+\newblock Discriminative training methods for hidden markov models: Theory and
+  experiments with perceptron algorithms.
+\newblock In {\em Proceedings of the ACL-02 Conference on Empirical Methods in
+  Natural Language Processing - Volume 10\/}, EMNLP '02. Stroudsburg, PA, USA:
+  Association for Computational Linguistics.
+
+\bibitem[De~Marneffe et~al., 2014]{de2014universal}
+De~Marneffe, Marie-Catherine, Timothy Dozat, Natalia Silveira, Katri Haverinen,
+  Filip Ginter, Joakim Nivre, and Christopher~D Manning, 2014.
+\newblock Universal stanford dependencies: A cross-linguistic typology.
+\newblock In {\em LREC\/}, volume~14.
+
+\bibitem[Haji{\v{c}} et~al., 2009]{hajivc2009semi}
+Haji{\v{c}}, Jan, Jan Raab, Miroslav Spousta, et~al., 2009.
+\newblock Semi-supervised training for the averaged perceptron pos tagger.
+\newblock In {\em Proceedings of the 12th Conference of the European Chapter of
+  the Association for Computational Linguistics\/}. Association for
+  Computational Linguistics.
+
+\bibitem[Kobyliński, 2014]{KOBYLISKI14.1018}
+Kobyliński, Łukasz, 2014.
+\newblock Polita: a multitagger for polish.
+\newblock In Nicoletta Calzolari~(Conference Chair), Khalid Choukri, Thierry
+  Declerck, Hrafn Loftsson, Bente Maegaard, Joseph Mariani, Asuncion Moreno,
+  Jan Odijk, and Stelios Piperidis (eds.), {\em Proceedings of the Ninth
+  International Conference on Language Resources and Evaluation (LREC'14)\/}.
+  Reykjavik, Iceland: European Language Resources Association (ELRA).
+
+\bibitem[Manning, 2011]{Manning2011}
+Manning, Christopher~D., 2011.
+\newblock {\em Part-of-Speech Tagging from 97{\%} to 100{\%}: Is It Time for
+  Some Linguistics?\/}.
+\newblock Berlin, Heidelberg: Springer Berlin Heidelberg, pages 171--189.
+
+\bibitem[P{\k{e}}zik, 2012]{pkezik2012graph}
+P{\k{e}}zik, Piotr, 2012.
+\newblock Graph-based analysis of collocational profiles.
+\newblock {\em Phraseologie im W{\"o}rterbuch und Korpus, Proceedings of
+  Europhras\/}:227--243.
+
+\bibitem[Radziszewski, 2013]{radziszewski2013tiered}
+Radziszewski, Adam, 2013.
+\newblock A tiered crf tagger for polish.
+\newblock {\em Intelligent tools for building a scientific information
+  platform\/}, 467:215--230.
+
+\bibitem[Radziszewski and Sniatowski, 2011]{radziszewski2011maca}
+Radziszewski, Adam and Tomasz Sniatowski, 2011.
+\newblock Maca-a configurable tool to integrate polish morphological data.
+
+\bibitem[Toutanova et~al., 2003]{Toutanova2003}
+Toutanova, Kristina, Dan Klein, Christopher~D. Manning, and Yoram Singer, 2003.
+\newblock Feature-rich part-of-speech tagging with a cyclic dependency network.
+\newblock In {\em Proceedings of the 2003 Conference of the North American
+  Chapter of the Association for Computational Linguistics on Human Language
+  Technology - Volume 1\/}, NAACL '03. Stroudsburg, PA, USA: Association for
+  Computational Linguistics.
+
+\bibitem[Waszczuk, 2012]{waszczuk2012harnessing}
+Waszczuk, Jakub, 2012.
+\newblock Harnessing the crf complexity with domain-specific constraints. the
+  case of morphosyntactic tagging of a highly inflected language.
+\newblock In {\em COLING\/}.
+
+\bibitem[Woliński, 2014]{wol:14}
+Woliński, Marcin, 2014.
+\newblock Morfeusz reloaded.
+\newblock In Nicoletta Calzolari, Khalid Choukri, Thierry Declerck, Hrafn
+  Loftsson, Bente Maegaard, Joseph Mariani, Asuncion Moreno, Jan Odijk, and
+  Stelios Piperidis (eds.), {\em Proceedings of the Ninth International
+  {C}onference on {L}anguage {R}esources and {E}valuation, {LREC}~2014\/}.
+  Reykjavík, Iceland: ELRA.
+
+\end{thebibliography}

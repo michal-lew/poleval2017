@@ -1,0 +1,145 @@
+\documentclass[10pt, a4paper]{article}
+\usepackage{ltc05}
+
+\title{Example of a paper for L\&T'07}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+%!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+% PLEASE DO NOT WRITE YOUR NAME AND ADDRESS IN THE DRAFT OF YOUR PAPER
+% SIMPLY ERASE THE LINES...
+\name{Zygmunt Vetulani$^{\ast}$, Jacek Marciniak$^{\ast}$, Tomasz
+Obr\c{e}bski$^{\ast}$, \\ \bf \large Filip Grali\'nski$^{\dagger}$, Maciej Lison$^{\ast}$} 
+
+\address{ $^{\ast}$Adam Mickiewicz University \\
+               Umultowska 87, 61-614 Pozna\'n, Poland \\ 
+               \{vetulani, jacekmar, obrebski, lison\}@amu.edu.pl \\ \\
+               $^{\dagger}$Ruritania State University \\ 
+               xyz Str., Ruricity, Ruritania \\
+               filipg@ceti.pl}
+% ... UP TO HERE
+%!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+%!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\abstract{Here is where you should put the abstract. Here is where you should put the abstract. Here is where you should put the abstract. Here is where you should put the abstract. Here is where you should put the abstract. Here is where you
+should put the abstract. Here is where you should put the abstract.}
+
+\begin{document}
+
+\maketitleabstract
+
+\section{Introduction}
+
+The first line of all paragraphs of each section is indented by 0.5 cm. The first line of all paragraphs of each section is indented by 0.5 cm. The first line of all paragraphs of each section is indented by 0.5 cm. The first line of all paragraphs of each section is indented by 0.5 cm.
+
+\section{Goal of the paper}
+
+Description of the main goal of the paper. Description of the main goal of the paper. Description of the main goal of the paper. Description of the main goal of the paper. Description of the main goal of the paper.
+
+Description of the main goal of the paper. Description of the main goal of the paper. Description of the main goal of the paper.
+
+\subsection{Example of a subsection}
+
+An example of a subsection. An example of a subsection. An example of a subsection. An example of a subsection. An example of a subsection. An example of a subsection. An example of a subsection.
+
+An example of a subsection. An example of a subsection. An example of a subsection.
+
+\subsubsection{Example of a sub-subsection} 
+Yet another example, this time of a sub-subsection. Yet another example, this time of a sub-subsection. Yet another example, this time of a sub-subsection. Yet another example, this time of a sub-subsection. Yet another example, this time of a sub-subsection.
+
+Yet another example, this time of a sub-subsection. Yet another example, this time of a sub-subsection. Yet another example, this time of a sub-subsection. Yet another example, this time of a sub-subsection. Yet another example, this time of a sub-subsection. Yet another example, this time of a sub-subsection.
+
+
+\subsubsection{Example of a sub-subsection with a long heading that will occupy two lines}
+
+Yet another example of a sub-subsection. Yet another example of a sub-subsection. Yet another example of a sub-subsection. Yet another example of a sub-subsection. Yet another example of a sub-subsection. 
+
+\section{Additional guidelines}
+
+\subsection{Footnotes}
+
+This is an example of a footnote\footnote{This is an example of the footnote text.}.
+
+
+\subsection{Figures}
+
+
+Example of a figure enclosed in a box.
+
+
+\begin{figure}[h]
+\begin{center}
+\fbox{\parbox{6cm}{
+This is a figure with a caption. This is a figure with a caption.}}
+\caption{The caption of the figure.}
+\end{center}
+\end{figure}
+
+\subsection{Tables}
+
+Two types of tables are distinguished: in-column and big tables that don't fit in the columns.
+
+
+\subsection{In-column tables}
+
+
+An example of an in-column table is presented here.
+
+\begin{table}[h]
+ \begin{center}
+\begin{tabular}{|l|l|}
+
+      \hline
+      Level&Tools\\
+      \hline\hline
+      Morphology & Pitrat Analyser\\
+      Syntax & LFG Analyser (C-Structure)\\
+      Semantics & LFG F-Structures + Sowa's\\
+      & Conceptual Graphs\\
+      \hline
+
+\end{tabular}
+\caption{The caption of the table}
+ \end{center}
+\end{table}
+
+
+\subsection{Big tables}
+
+An example of a big table which extends beyond the column and will
+float in the next page.
+
+ \begin{table*}[ht]
+ \begin{center}
+ \begin{tabular}{|l|l|}
+
+       \hline
+       Level&Tools\\
+       \hline\hline
+       Morphology & Pitrat Analyser\\
+       Syntax & LFG Analyser (C-Structure)\\
+       Semantics & LFG F-Structures + Sowa's Conceptual Graphs  \\
+       \hline
+
+ \end{tabular}
+ \caption{The caption of the big table}
+ \end{center}
+ \end{table*}
+
+
+\section{Citation Format}
+
+All references within the text are placed in parentheses containing the author's surname followed by a comma before the date of publication \cite{chomsky-73}. If the sentence already includes the author's name, then it is only necessary to put the date in parentheses: \newcite{aslin-49} . When several works are cited, those references are separated with a semicolon \cite{chomsky-73,feigl-58}:  When the reference has more than three authors, only the name of the first author, followed by et al,  appears \cite{fletcher-hopkins}.
+
+Bibliographical references are listed in alphabetical order at the end of the article. The title of the section, ``References'', will be a level 1 heading. The first line of each bibliographical reference is justified to the left of the column, and the rest of the entry is indented by 0.35 cm. The following examples illustrate the format for conference proceedings \cite{chave-64}, books \cite{butcher-81}, articles \cite{howells-51} in journals, Ph.D. theses \cite{croft-78}, and chapters of book \cite{feigl-58}.
+
+%\nocite{*}
+
+\bibliographystyle{ltc05}
+\bibliography{xample} 
+
+\end{document}
+

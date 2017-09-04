@@ -1,0 +1,129 @@
+% !TEX encoding = UTF-8 Unicode
+\documentclass[10pt, a4paper]{article}
+
+
+\usepackage{footnote}
+\makesavenoteenv{tabular}
+\usepackage{ltc05}
+%\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{url}
+\title{Sentiment Analysis}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+%!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+% PLEASE DO NOT WRITE YOUR NAME AND ADDRESS IN THE DRAFT OF YOUR PAPER
+% SIMPLY ERASE THE LINES...
+\name{Piotr Pęzik$^{\ast}$\\ \bf \large Sebastian Laskowski$^{\dagger}$} 
+
+\address{ $^{\ast}$University of Lodz \\
+               piotr.pezik@uni.lodz.pl \\ \\
+               $^{\dagger}$VoiceLab \\ 
+               dupa@voicelab.pl}
+
+%% ... UP TO HERE
+% ... UP TO HERE
+%!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+%!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\abstract{This paper evaluates thsdfh.}
+
+\begin{document}
+
+\maketitleabstract
+
+\section{Introduction}   
+Sentiment analysis is one of fundamental task in natural language processing. 
+
+\cite{de2014universal}. 
+%We also briefly discuss the importance of a PoS tagger's ability to label out-of-vocabulary words in some domains of naturally-occurring language which are difficult to represent in annotated corpora.
+
+\section{Previous work}
+
+
+
+
+\section{The Data}
+\subsection{POLEVAL2017 dataset}
+
+
+It should be noted that the sample used to evaluate the tagger is rather small compared with the conventional test splits used in machine learning experiments. Nevertheless, using this test set esured some consistency of the reported accuracy scores with the results  reported for the other systems submitted to PolEval. 
+
+\section{Model} 
+
+
+\subsection{LSTM}
+
+Recurrent Neural Networks has been widely used for many task in natural language processing. They can process the arbitrary long inputs by recurrent application of transition function over hidden state. 
+	The most common form of RNN's transition function is an affine transformation followed by hyperbolic tangent function
+	\begin{equation} h_t = tanh(W_{x_t}+U_{h_{t-1}}+b)
+\end{equation}
+	  	This gives them ability to use the information gathered in previous states when processing text. In theory it makes them able to look at the infinite history while processing sequences of words. 	Unfortunately they suffer from so called vanishing gradient problem, which means that during training gradient can grow or decay exponentially over long sequences [s (Hochreiter,
+1998; Bengio et al., 1994)]
+	The LSTM architecture (Hochreiter and Schmidhuber, 1997) addresses this problem of learning long-term dependencies by introducing a memory cell that is able to preserve state over long periods of time. [citation]
+		There are many different variants of LSTMs, in our work we used following equations:
+		[równania LSTM]		
+		where $x_t$ is input at current timestep, $i_t$ is an input gate, $f_t$ a forget gate, $o_t$ an output gate and $c$ stands for LSTM memory.
+		The gates mechanism controles how much information from past state and memory is used at current timestep. 
+
+\subsection{Tree-LSTM}
+	The problem with classical LSTM's is that they are linear chain which makes them useless for processing more sophisticated structures than sequences. In particular, many linguistic beings are represented with tree-structure [citation?].
+	In order to process tree-structured data we need to extend the LSTM architecture. In our work we propose Sequential-Child-Combination Tree-LSTM.
+	In general, tree-structured Recurrent Neural Networks expand basic RNNs by creating a way to plug in more than one previous state to hidden unit at current time step.
+	[obrazek podłączanie 2 poprzednich stanów do nowego]
+	The essence lie in the way in which the children states are combined with parent state.
+	
+\subsection{Sequential-Child-Combination Tree-LSTM}
+	In our work we combine children with its parent as follows:
+	
+\section{Evaluation} 
+
+\begin{table}[h]
+ \begin{center}
+\begin{tabular}{|l|l|}
+
+      \hline
+      %Level&Tools\\
+      %\hline\hline
+      Number of tags (without \textit{ign}) & 35\\
+      \hline
+      Token accuracy & 98.2\%\\
+      \hline
+      Training set & PolEval TR\\
+      \hline
+      Test set & PolEval TE\\
+           \hline
+      Training time & 5m 40s \\
+      &(5 iterations)\\
+      \hline
+      Tagging time & 1.42s\\
+ 
+      \hline
+\end{tabular}
+\caption{Speed and accuracy evaluation of an AP-based `flexeme' tagger.}
+\label{tab:main_tags}
+ \end{center}
+\end{table}
+
+
+
+\section{Conclusions and future work}
+
+
+\section{Availability}
+
+The source code of the tagger described in this paper, together with the trained models, datasets, tagset translations and other resources such as the NCP Brown clusters are publicly available at \url{https://gitlab.com/piotr.pezik/apt_pl}.
+
+%\nocite{*}
+
+\bibliographystyle{ltc05}
+\bibliography{xample} 
+
+\end{document}
+
