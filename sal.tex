@@ -11,7 +11,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{url}
-\title{Sentiment Analysis}
+\title{A Sequential Child-Combination Tree-LSTM Network for Sentiment Analysis}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -40,7 +40,8 @@
 \maketitleabstract
 
 \section{Introduction}   
-Sentiment Analysis (SA) is an active area of natural language processing with applications in general opinion mining, customer relations management systems, marketing and social media communication studies. A common objective of SA is to automatically detect the attitudinal value of an utterance or otherwise coherent stretch of text which can be attributed to a particular author. The distribution of  such attitudinal values in an utterance is usually known as its \textit{polarity} as it usually ranges from positive to neutral and negative.\cite{cambria_schuller}. More recent approaches to SA stress the importance of phrase-level polarity classification, whereby attitudinal values are detected at the level of syntactic phrases and subsequently compositionally combined to obtain the polarity of an entire utterance. Such approaches are particulary important in aspect-based SA, where different aspects of a product or other objects of one's opinions are important to detect and classify. Also, phrase-level SA is better suited to deal with basic syntactic operations such as negation or modality which may cause a significant shift in the predominant sentiment of an utterance.\cite{wilson_wiebe}. 
+Sentiment Analysis (SA) is an active area of natural language processing research with applications in general opinion mining, customer relations management systems, marketing and social media communication studies to mention just a few examples. A common objective of SA is to automatically detect the attitudinal value of an utterance or otherwise coherent stretch of text which can be attributed to a particular author. The distribution of  such attitudinal values in an utterance is usually known as its \textit{polarity} and it usually ranges from positive to neutral and negative \cite{cambria_schuller}. More recent approaches to SA focus on phrase-level polarity classification, whereby attitudinal values are detected at the level of syntactic phrases and only then compositionally combined to compute the polarity of an entire utterance. Such approaches are particularly important in aspect-based SA, where different aspects of one's opinion about a product, movie, person, etc. have to be detected in addition to  classifying the overall sentiment of a text unit. Also, phrase-level SA is better suited to deal with basic syntactic phenomena such as negation or modality which may cause a significant shift in the predominant sentiment of an utterance \cite{wilson_wiebe}. For example, the overall polarity of the Polish sentence shown in Table \ref{tab:nie_drazni_1}, which describes a buyer's overall satisfaction with a particular brand of perfume, is positive, even though its (directly negated) main verb \textit{drażnić} (irritate) could be found in a list of keywords denoting negative sentiment. 
+\par The present paper evaluates a deep-learning based system for to syntax-driven SA submitted to the PolEval 2017 competition. We first briefly describe the syntactically annotated sentiment datasets used and the exact nature of the SA classification task. Next, we present the Sequential Child-Combination Tree-LSTM Network designed to implement our system and evaluate its performance on the PolEval test set.
 
 
 \section{PolEval 2017}
@@ -76,7 +77,7 @@ Sentiment Analysis (SA) is an active area of natural language processing with ap
 
 \subsection{LSTM}
 
-Recurrent Neural Networks has been widely used for many task in natural language processing. They can process the arbitrary long inputs by recurrent application of transition function over hidden state. 
+Recurrent Neural Networks have been widely used for many task in natural language processing. They can process the arbitrary long inputs by recurrent application of transition function over hidden state. 
 	The most common form of RNN's transition function is an affine transformation followed by hyperbolic tangent function
 	\begin{equation} h_t = tanh(W_{x_t}+U_{h_{t-1}}+b)
 \end{equation}
@@ -90,7 +91,7 @@ Recurrent Neural Networks has been widely used for many task in natural language
 
 \subsection{Tree-LSTM}
 	The problem with classical LSTM's is that they are linear chain which makes them useless for processing more sophisticated structures than sequences. In particular, many linguistic beings are represented with tree-structure [citation?].
-	In order to process tree-structured data we need to extend the LSTM architecture. In our work we propose Sequential-Child-Combination Tree-LSTM.
+	In order to process tree-structured data we need to extend the LSTM architecture. In our work we propose Sequential Child-Combination Tree-LSTM.
 	In general, tree-structured Recurrent Neural Networks expand basic RNNs by creating a way to plug in more than one previous state to hidden unit at current time step.
 	[obrazek podłączanie 2 poprzednich stanów do nowego]
 	The essence lie in the way in which the children states are combined with parent state.
