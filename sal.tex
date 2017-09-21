@@ -19,12 +19,12 @@
 %!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 % PLEASE DO NOT WRITE YOUR NAME AND ADDRESS IN THE DRAFT OF YOUR PAPER
 % SIMPLY ERASE THE LINES...
-\name{ML$^{\ast}$\\ \bf \large PęP$^{\dagger}$} 
+\name{ML$^{\dagger}$\\ \bf \large PęP$^{\ast}$} 
 
-\address{ $^{\ast}$University of Lodz \\	
-               piotr.pezik@uni.lodz.pl \\ \\
-               $^{\dagger}$VoiceLab \\ 
-               dupa@voicelab.pl}
+\address{ $^{\dagger}$VoiceLab \\	
+               michal.lew@voicelab.pl \\ \\
+               $^{\ast}$University of Lodz \\ 
+               piotr.pezik@uni.lodz.pl}
 
 %% ... UP TO HERE
 % ... UP TO HERE
@@ -40,10 +40,7 @@
 \maketitleabstract
 
 \section{Introduction}   
-Sentiment analysis is one of fundamental task in natural language processing. 
-
-\cite{de2014universal}. 
-%We also briefly discuss the importance of a PoS tagger's ability to label out-of-vocabulary words in some domains of naturally-occurring language which are difficult to represent in annotated corpora.
+Sentiment Analysis (SA) is an active area of natural language processing with applications in general opinion mining, customer relations management systems, marketing and social media communication studies. A common objective of SA is to automatically detect the attitudinal value of an utterance or otherwise coherent stretch of text which can be attributed to a particular author. The distribution of  such attitudinal values in an utterance is usually known as its \textit{polarity} as it usually ranges from positive to neutral and negative.\cite{cambria_schuller}. More recent approaches to SA stress the importance of phrase-level polarity classification, whereby attitudinal values are detected at the level of syntactic phrases and subsequently compositionally combined to obtain the polarity of an entire utterance. Such approaches are particulary important in aspect-based SA, where different aspects of a product or other objects of one's opinions are important to detect and classify. Also, phrase-level SA is better suited to deal with basic syntactic operations such as negation or modality which may cause a significant shift in the predominant sentiment of an utterance.\cite{wilson_wiebe}. 
 
 \section{Previous work}
 
@@ -51,10 +48,10 @@ Sentiment analysis is one of fundamental task in natural language processing.
 
 
 \section{The Data}
-\subsection{POLEVAL2017 dataset}
+\subsection{PolEval 2017 Dataset}
 
+Nanan 
 
-It should be noted that the sample used to evaluate the tagger is rather small compared with the conventional test splits used in machine learning experiments. Nevertheless, using this test set esured some consistency of the reported accuracy scores with the results  reported for the other systems submitted to PolEval. 
 
 \section{Model} 
 
@@ -127,7 +124,7 @@ The source code of the tagger described in this paper, together with the trained
 %\nocite{*}
 
 \bibliographystyle{ltc05}
-\bibliography{xample} 
+\bibliography{sal} 
 
 \end{document}
 
