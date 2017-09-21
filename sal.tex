@@ -83,7 +83,7 @@ Sentiment Analysis (SA) is an active area of natural language processing researc
       \hline
      Nie &	0\\
      \hline
-Nie drażni nawet po całym dniu	 & 1\\
+Nie drażni nawet po całym dniu	 . & 1\\
 \hline
 nawet &	0\\
 \hline
@@ -94,7 +94,7 @@ całym dniu &	0\\
 .	& 0\\
       \hline
 \end{tabular}
-\caption{Phrase- and word-level sentiment values for the example sentence shown in Table \ref{tab:nie_drazni_1}.}
+\caption{Phrase- and word-level sentiment values to be predicted for the example sentence shown in Table \ref{tab:nie_drazni_1}.}
 \label{tab:nie_drazni_2}
  \end{center}
 \end{table}
@@ -129,8 +129,8 @@ Recurrent Neural Networks have been widely used for many task in natural languag
 \end{split}
 \end{equation}
 
-		where $x_t$ is input at current timestep, $i_t$ is an input gate, $f_t$ a forget gate, $o_t$ an output gate and $c$ stands for LSTM memory.
-		The gates mechanism controles how much information from past state and memory is used at current timestep. 
+		where $x_t$ is input at current time step, $i_t$ is an input gate, $f_t$ a forget gate, $o_t$ an output gate and $c$ stands for LSTM memory.
+		The gates mechanism controls how much information from past states and memory is used at the current time step. 
 
 \subsection{Tree-LSTM}
 	The problem with classical LSTM's is that they are linear chain which makes them useless for processing more sophisticated structures than sequences. In particular, many linguistic beings are represented with tree-structure [citation?].
