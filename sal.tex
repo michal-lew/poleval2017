@@ -42,15 +42,33 @@
 \section{Introduction}   
 Sentiment Analysis (SA) is an active area of natural language processing with applications in general opinion mining, customer relations management systems, marketing and social media communication studies. A common objective of SA is to automatically detect the attitudinal value of an utterance or otherwise coherent stretch of text which can be attributed to a particular author. The distribution of  such attitudinal values in an utterance is usually known as its \textit{polarity} as it usually ranges from positive to neutral and negative.\cite{cambria_schuller}. More recent approaches to SA stress the importance of phrase-level polarity classification, whereby attitudinal values are detected at the level of syntactic phrases and subsequently compositionally combined to obtain the polarity of an entire utterance. Such approaches are particulary important in aspect-based SA, where different aspects of a product or other objects of one's opinions are important to detect and classify. Also, phrase-level SA is better suited to deal with basic syntactic operations such as negation or modality which may cause a significant shift in the predominant sentiment of an utterance.\cite{wilson_wiebe}. 
 
-\section{Previous work}
+
+\section{PolEval 2017}
+
+
+\begin{table}[h]
+ \begin{center}
+\begin{tabular}{|l l l l l l l l|}
+
+      \hline
+      %Level&Tools\\
+      %\hline\hline
+      W & Nie & drażni & nawet & po & całym & dniu & . \\
+      \hline
+      P & 2 & 0 & 2 & 2 & 6 & 4 & 2 \\
+      \hline
+      S & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\
+ 
+      \hline
+\end{tabular}
+\caption{An example PolEval dataset sentence with phrase-level sentiment annotation (W -- word nodes, P -- syntactic parents, S -- polarity value).}
+\label{tab:nie_drazni_1}
+ \end{center}
+\end{table}
 
 
 
 
-\section{The Data}
-\subsection{PolEval 2017 Dataset}
-
-Nanan 
 
 
 \section{Model} 
