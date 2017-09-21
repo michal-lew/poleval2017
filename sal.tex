@@ -11,7 +11,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{url}
-\title{A Sequential Child-Combination Tree-LSTM Network for Sentiment Analysis}
+\title{A Sequential Child Combination Tree-LSTM Network for Sentiment Analysis}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -41,7 +41,7 @@
 
 \section{Introduction}   
 Sentiment Analysis (SA) is an active area of natural language processing research with applications in general opinion mining, customer relations management systems, marketing and social media communication studies to mention just a few examples. A common objective of SA is to automatically detect the attitudinal value of an utterance or otherwise coherent stretch of text which can be attributed to a particular author. The distribution of  such attitudinal values in an utterance is usually known as its \textit{polarity} and it usually ranges from positive to neutral and negative \cite{cambria_schuller}. More recent approaches to SA focus on phrase-level polarity classification, whereby attitudinal values are detected at the level of syntactic phrases and only then compositionally combined to compute the polarity of an entire utterance. Such approaches are particularly important in aspect-based SA, where different aspects of one's opinion about a product, movie, person, etc. have to be detected in addition to  classifying the overall sentiment of a text unit. Also, phrase-level SA is better suited to deal with basic syntactic phenomena such as negation or modality which may cause a significant shift in the predominant sentiment of an utterance \cite{wilson_wiebe}. For example, the overall polarity of the Polish sentence shown in Table \ref{tab:nie_drazni_1}, which describes a buyer's overall satisfaction with a particular brand of perfume, is positive, even though its (directly negated) main verb \textit{drażnić} (irritate) could be found in a list of keywords denoting negative sentiment. 
-\par The present paper evaluates a deep-learning based system for to syntax-driven SA submitted to the PolEval 2017 competition. We first briefly describe the syntactically annotated sentiment datasets used and the exact nature of the SA classification task. Next, we present the Sequential Child-Combination Tree-LSTM Network designed to implement our system and evaluate its performance on the PolEval test set.
+\par The present paper evaluates a deep-learning based system for syntax-driven SA, which was submitted to the PolEval 2017 competition. We first briefly describe the syntactically annotated sentiment datasets used and the nature of the classification task. Next, we present the Sequential Child-Combination Tree-LSTM Network implementation of our system and evaluate its performance on the PolEval test set.
 
 
 \section{PolEval 2017}
