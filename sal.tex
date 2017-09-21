@@ -1,7 +1,7 @@
 % !TEX encoding = UTF-8 Unicode
 \documentclass[10pt, a4paper]{article}
 
-
+\usepackage{amsmath}
 \usepackage{footnote}
 \makesavenoteenv{tabular}
 \usepackage{ltc05}
@@ -117,7 +117,18 @@ Recurrent Neural Networks have been widely used for many task in natural languag
 1998; Bengio et al., 1994)]
 	The LSTM architecture (Hochreiter and Schmidhuber, 1997) addresses this problem of learning long-term dependencies by introducing a memory cell that is able to preserve state over long periods of time. [citation]
 		There are many different variants of LSTMs, in our work we used following equations:
-		[równania LSTM]		
+		
+\begin{equation}
+\begin{split}
+		&i_t = \sigma(U_{x_t}^i + W_{s_t-1}^i + b^i) ,\\
+		&f_t = \sigma(U_{x_t}^f + W_{s_t-1}^f + b^f) ,\\
+		&o_t = \sigma(U_{x_t}^o + W_{s_t-1}^o + b^o) ,\\
+		&g_t = \tanh(U_{x_t}^g+ W_{s_t-1}^g + b^g) ,\\
+		&c_t = c_{t-1} \bullet f_t + g_t \bullet i_t ,\\
+		&s_t = \tanh(c_t) \bullet o_t 
+\end{split}
+\end{equation}
+
 		where $x_t$ is input at current timestep, $i_t$ is an input gate, $f_t$ a forget gate, $o_t$ an output gate and $c$ stands for LSTM memory.
 		The gates mechanism controles how much information from past state and memory is used at current timestep. 
 
@@ -129,10 +140,56 @@ Recurrent Neural Networks have been widely used for many task in natural languag
 	The essence lie in the way in which the children states are combined with parent state.
 
 \subsection{Child-Sum Tree-LSTM}
-        Child-Sum Tree-LSTM equations
+Child-Sum Tree-LSTM equations
+
 	
 \subsection{Sequential-Child-Combination Tree-LSTM}
+
+\begin{figure}[h]
+	 \begin{center}
+    	\includegraphics[width=0.5\textwidth]{sequentialchild}
+		\caption{Sequentially combining the children with parent}
+	 \end{center}
+\end{figure}
 	In our work we combine children with its parent as follows:
+\begin{equation}
+\begin{split}
+&i_{ch_1} = \sigma(U_{x_t}^i + W_{s_{t-1}}^i + b^i) ,\\
+&f_{ch_1} = \sigma(U_{x_t}^f + W_{s_{t-1}}^f + b^f) ,\\
+&o_{ch_1} = \sigma(U_{x_t}^o + W_{s_{t-1}}^o + b^o) ,\\
+&g_{ch_1} = \tanh(U_{x_t}^g+ W_{s_{t-1}}^g + b^g) ,\\
+&c_{ch_1} = c_{t-1} \bullet f_{ch_1} + g_{ch_1} \bullet i_{ch_1} ,\\
+&s_{ch_1} = \tanh({c_{ch_1}}) \bullet o_{ch_1},\\\\
+&i_{ch_2} = \sigma(U_{x_t}^i + W_{ch_1}^i + b^i) ,\\
+&f_{ch_2} = \sigma(U_{x_t}^f + W_{ch_1}^f + b^f) ,\\
+&o_{ch_2} = \sigma(U_{x_t}^o + W_{ch_1}^o + b^o) ,\\
+&g_{ch_2} = \tanh(U_{x_t}^g+ W_{ch_1}^g + b^g) ,\\
+&c_{ch_2} = c_{ch_1} \bullet f_{ch_2} + g_{ch_2} \bullet i_{ch_2} ,\\
+&s_{ch_2} = \tanh(c_{ch_2}) \bullet o_{ch_2},\\\\
+&\cdots\\\\
+&i_{ch_n} = \sigma(U_{x_t}^i + W_{ch_{n-1}}^i + b^i) ,\\
+&f_{ch_n} = \sigma(U_{x_t}^f + W_{ch_{n-1}}^f + b^f) ,\\
+&o_{ch_n} = \sigma(U_{x_t}^o + W_{ch_{n-1}}^o + b^o) ,\\
+&g_{ch_n} = \tanh(U_{x_t}^g+ W_{ch_{n-1}}^g + b^g) ,\\
+&c_{ch_n} = c_{ch_n} \bullet f_{ch_n} + g_{ch_n} \bullet i_{ch_n} ,\\
+&s_{ch_n} = \tanh(c_{ch_n}) \bullet o_{ch_n},\\\\
+&s_{t} = s_{ch_n}
+\end{split}
+\end{equation}
+	where $s_{ch_i}$ is an intermediate state after combining with i-th children.\\
+Intuicyjnie, łączymy dzieci z rodzicem od lewej do prawej w taki sposób, że tworzymy pośrednie zanurzenia niosące informację o ojcu uzupełnioną o informację o poddrzewie, którego korzeniem jest dane dziecko.
+Ostateczny stan po połączeniu ze wszystkimi dziećmi tworzy znaczenie całego drzewa.
+Przykład 'Stary rudy kot wlazł na płot'
+mamy kot-stary kot-rudy kot-wlazł
+z tego wychodzi, że stary kot-rudy stary kot-wlazł
+stary rudy kot-wlazł itd.
+można przedstawić taki przykład, żeby pokazać intuicję stojącą za tym sposobem.
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{staryrudykot}
+		\caption{Przykład}
+	\end{center}
+\end{figure}
 	
 \section{Evaluation} 
 
@@ -143,19 +200,19 @@ Recurrent Neural Networks have been widely used for many task in natural languag
       \hline
       %Level&Tools\\
       %\hline\hline
-      Number of tags (without \textit{ign}) & 35\\
+      Model & Score\\
       \hline
-      Token accuracy & 98.2\%\\
+      LSTM &70,70\%\\
       \hline
-      Training set & PolEval TR\\
+      Lemmatized CRF & 75,63\%\\
       \hline
-      Test set & PolEval TE\\
-           \hline
-      Training time & 5m 40s \\
-      &(5 iterations)\\
+      Child-Sum Tree-LSTM &  77,69\%\\
       \hline
-      Tagging time & 1.42s\\
- 
+      Sequential-Child-Combination Tree-LSTM & 78,56\%\\
+      \hline
+      Lemmatized Child-Sum Tree-LSTM & 78,90\%\\
+      \hline
+      Lemmatized Sequential-Child-Combination Tree-LSTM & \textbf{79,89\%} \\
       \hline
 \end{tabular}
 \caption{Speed and accuracy evaluation of an AP-based `flexeme' tagger.}
