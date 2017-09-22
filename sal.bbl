@@ -1,4 +1,4 @@
-\begin{thebibliography}{3}
+\begin{thebibliography}{4}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 
 \bibitem[Cambria et~al., 2013]{cambria_schuller}
@@ -13,6 +13,12 @@ Socher, Richard, Alex Perelygin, Jean Wu, Jason Chuang, Christopher~D Manning,
   treebank.
 \newblock In {\em Proceedings of the 2013 conference on empirical methods in
   natural language processing\/}.
+
+\bibitem[Tai et~al., 2015]{tai2015improved}
+Tai, Kai~Sheng, Richard Socher, and Christopher~D Manning, 2015.
+\newblock Improved semantic representations from tree-structured long
+  short-term memory networks.
+\newblock {\em arXiv preprint arXiv:1503.00075\/}.
 
 \bibitem[Wilson et~al., 2009]{wilson_wiebe}
 Wilson, Theresa, Janyce Wiebe, and Paul Hoffmann, 2009.
