@@ -1,10 +1,18 @@
-\begin{thebibliography}{2}
+\begin{thebibliography}{3}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 
 \bibitem[Cambria et~al., 2013]{cambria_schuller}
 Cambria, E., B.~Schuller, Y.~Xia, and C.~Havasi, 2013.
 \newblock New avenues in opinion mining and sentiment analysis.
 \newblock {\em IEEE Intelligent Systems\/}, 28(2):15--21.
+
+\bibitem[Socher et~al., 2013]{socher2013recursive}
+Socher, Richard, Alex Perelygin, Jean Wu, Jason Chuang, Christopher~D Manning,
+  Andrew Ng, and Christopher Potts, 2013.
+\newblock Recursive deep models for semantic compositionality over a sentiment
+  treebank.
+\newblock In {\em Proceedings of the 2013 conference on empirical methods in
+  natural language processing\/}.
 
 \bibitem[Wilson et~al., 2009]{wilson_wiebe}
 Wilson, Theresa, Janyce Wiebe, and Paul Hoffmann, 2009.
