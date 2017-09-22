@@ -47,7 +47,9 @@ Sentiment Analysis (SA) is an active area of natural language processing researc
 
 \section{PolEval 2017}
 
-The dataset released in the PolEval competition for the task described in this paper can be described as a sentiment dependency treebank. In general, sentiment treebanks are syntactically-parsed collections of sentiment-annotated sentences. For example, the Stanford Sentiment Treebank \cite{socher2013recursive}
+The dataset released in the PolEval competition for the task described in this paper can be described as a sentiment dependency treebank. In general, sentiment treebanks are collections of syntactically parsed sentences which have sentiment annotations for their constituent words phrases. The choice of the sub-sentential word combinations to get such sentiment labels may depend on the exact syntactic formalism used in a given treebank. For example, the Stanford Sentiment Treebank \cite{socher2013recursive} 
+
+Most sentence dependency graphs are N-ary trees in that a word node may directly govern only one or more than two other word vertices as shown in  \ref{fig:dep_sent} where the verb \textit{drażni} has four direct dependents, whereas the noun \textit{dniu} has only one dependent adjective.
  
 which could be translated word-for-word into English as \textit{(It) doesn't irritate even after a whole day.}
 
@@ -74,7 +76,7 @@ which could be translated word-for-word into English as \textit{(It) doesn't irr
 \begin{figure}
   \includegraphics[width=\linewidth]{imgs/nie_drazni.pdf}
   \caption{A dependency representation of the example sentence shown in Table \ref{tab:nie_drazni_1}.}
-  \label{fig:boat1}
+  \label{fig:dep_sent}
 \end{figure}
 
 \begin{table}[h]
@@ -215,7 +217,8 @@ można przedstawić taki przykład, żeby pokazać intuicję stojącą za tym sp
       \hline
       Lemmatized Child-Sum Tree-LSTM & 78,90\%\\
       \hline
-      Lemmatized Sequential-Child-Combination Tree-LSTM & \textbf{79,89\%} \\
+      Lemmatized Sequential Child Combination & \\
+      Tree-LSTM & \textbf{79,89\%} \\
       \hline
 \end{tabular}
 \caption{Sentiment classification accuracy on the PolEval test set.}
