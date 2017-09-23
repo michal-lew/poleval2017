@@ -1,10 +1,27 @@
-\begin{thebibliography}{6}
+\begin{thebibliography}{9}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+
+\bibitem[Bengio et~al., 1994]{bengio1994learning}
+Bengio, Yoshua, Patrice Simard, and Paolo Frasconi, 1994.
+\newblock Learning long-term dependencies with gradient descent is difficult.
+\newblock {\em IEEE transactions on neural networks\/}, 5(2):157--166.
 
 \bibitem[Cambria et~al., 2013]{cambria_schuller}
 Cambria, E., B.~Schuller, Y.~Xia, and C.~Havasi, 2013.
 \newblock New avenues in opinion mining and sentiment analysis.
 \newblock {\em IEEE Intelligent Systems\/}, 28(2):15--21.
+
+\bibitem[Hochreiter, 1998]{hochreiter1998vanishing}
+Hochreiter, Sepp, 1998.
+\newblock The vanishing gradient problem during learning recurrent neural nets
+  and problem solutions.
+\newblock {\em International Journal of Uncertainty, Fuzziness and
+  Knowledge-Based Systems\/}, 6(02):107--116.
+
+\bibitem[Hochreiter and Schmidhuber, 1997]{hochreiter1997long}
+Hochreiter, Sepp and J{\"u}rgen Schmidhuber, 1997.
+\newblock Long short-term memory.
+\newblock {\em Neural computation\/}, 9(8):1735--1780.
 
 \bibitem[Lai et~al., 2015]{lai2015recurrent}
 Lai, Siwei, Liheng Xu, Kang Liu, and Jun Zhao, 2015.
