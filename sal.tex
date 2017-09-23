@@ -48,8 +48,7 @@ Sentiment Analysis (SA) is an active area of natural language processing researc
 \section{PolEval 2017}
 
 The dataset released in the PolEval competition for the task described in this paper can be described as a sentiment dependency treebank. In general, sentiment treebanks are collections of syntactically parsed sentences which have sentiment annotations assigned to their constituent words or phrases. The type of sub-sentential word combinations which are annotated with  sentiment labels may depend on the exact syntactic formalism used in a given treebank. For example, the Stanford Sentiment Treebank \cite{socher2013recursive} contains full (binary) constituency parse trees comprising phrases associated with five sentiment classes. On the other hand, the sentences in the PolEval dataset, are dependency-parsed. As we explain below, this has implications for modelling an SA system which makes use of syntactic annotations. For example, unlike the above-mentioned constituency representations, most sentence dependency graphs are N-ary trees in that a word node may directly govern only one or more than two other word vertices as shown in \ref{fig:dep_sent}, where the verb \textit{drażni} has four direct dependents, and the noun \textit{dniu} has only one dependent adjective \textit{całym}. 
-\par This example sentence \footnote{Its word-for-word into English could be \textit{(It) doesn't irritate even after a whole day.}} also illustrates the point of using syntactic annotation in sentiment analysis. It is quite evident that this sentence expresses a customer's overall satisfaction with a particular brand of perfume, even though its (directly negated) main verb \textit{drażnić} (irritate) could be found in a list of keywords denoting negative sentiment.
- 
+\par This example sentence\footnote{Its word-for-word into English could be \textit{(It) doesn't irritate even after a whole day.}} also illustrates the point of using syntactic annotation in sentiment analysis. It is quite evident that it expresses a customer's overall satisfaction with a particular brand of perfume, even though its (directly negated) main verb \textit{drażnić} (irritate) could be found in a list of keywords denoting negative sentiment. On a more subtle level, the positive attitude of this utterance towards this particular product is further reinforced by the indirectly negated adverbial clause (i.e. \textit{even after a whole day}), which denotes a condition in which other fragrances might be irritating.
 
 \begin{table}[h]
  \begin{center}
@@ -110,13 +109,12 @@ całym dniu &	0\\
 \section{Model} 
 
 
-\subsection{LSTM}
+\subsection{LSTM Neural Networks}
 
-Recurrent Neural Networks have been widely used for many task in natural language processing. They can process the arbitrary long inputs by recurrent application of transition function over hidden state. 
-	The most common form of RNN's transition function is an affine transformation followed by hyperbolic tangent function
+Different variants of Recurrent Neural Networks (RNNs) have been widely used for many task in natural language processing such named entity recognition \cite{lample2016neural} or text classification \cite{lai2015recurrent}. They can process the arbitrarily long inputs by recurrent application of a transition function over hidden states. The most common form of an RNN transition function is an affine transformation followed by hyperbolic tangent function:
 	\begin{equation} h_t = tanh(W_{x_t}+U_{h_{t-1}}+b)
 \end{equation}
-	  	This gives them ability to use the information gathered in previous states when processing text. In theory it makes them able to look at the infinite history while processing sequences of words. 	Unfortunately they suffer from so called vanishing gradient problem, which means that during training gradient can grow or decay exponentially over long sequences [s (Hochreiter,
+	This gives them ability to use the information gathered in previous states when processing text. In theory it makes them able to look at the infinite history while processing sequences of words. 	Unfortunately they suffer from so called vanishing gradient problem, which means that during training gradient can grow or decay exponentially over long sequences [s (Hochreiter,
 1998; Bengio et al., 1994)]
 	The LSTM architecture (Hochreiter and Schmidhuber, 1997) addresses this problem of learning long-term dependencies by introducing a memory cell that is able to preserve state over long periods of time. [citation]
 		There are many different variants of LSTMs, in our work we used following equations:

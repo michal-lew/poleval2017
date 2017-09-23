@@ -1,10 +1,21 @@
-\begin{thebibliography}{4}
+\begin{thebibliography}{6}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 
 \bibitem[Cambria et~al., 2013]{cambria_schuller}
 Cambria, E., B.~Schuller, Y.~Xia, and C.~Havasi, 2013.
 \newblock New avenues in opinion mining and sentiment analysis.
 \newblock {\em IEEE Intelligent Systems\/}, 28(2):15--21.
+
+\bibitem[Lai et~al., 2015]{lai2015recurrent}
+Lai, Siwei, Liheng Xu, Kang Liu, and Jun Zhao, 2015.
+\newblock Recurrent convolutional neural networks for text classification.
+\newblock In {\em AAAI\/}, volume 333.
+
+\bibitem[Lample et~al., 2016]{lample2016neural}
+Lample, Guillaume, Miguel Ballesteros, Sandeep Subramanian, Kazuya Kawakami,
+  and Chris Dyer, 2016.
+\newblock Neural architectures for named entity recognition.
+\newblock {\em arXiv preprint arXiv:1603.01360\/}.
 
 \bibitem[Socher et~al., 2013]{socher2013recursive}
 Socher, Richard, Alex Perelygin, Jean Wu, Jason Chuang, Christopher~D Manning,
