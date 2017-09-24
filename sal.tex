@@ -101,11 +101,6 @@ całym dniu &	0\\
  \end{center}
 \end{table}
 
-
-
-
-
-
 \section{Model} 
 
 
@@ -119,10 +114,10 @@ Different variants of Recurrent Neural Networks (RNNs) have been widely used for
 		
 \begin{equation}
 \begin{split}
-		&i_t = \sigma(U_{x_t}^i + W_{s_t-1}^i + b^i) ,\\
-		&f_t = \sigma(U_{x_t}^f + W_{s_t-1}^f + b^f) ,\\
-		&o_t = \sigma(U_{x_t}^o + W_{s_t-1}^o + b^o) ,\\
-		&g_t = \tanh(U_{x_t}^g+ W_{s_t-1}^g + b^g) ,\\
+		&i_t = \sigma(U^i{x_t} + W^is_{t-1} + b^i) ,\\
+		&f_t = \sigma(U^f{x_t} + W^fs_{t-1} + b^f) ,\\
+		&o_t = \sigma(U^o{x_t} + W^os_{t-1} + b^o) ,\\
+		&g_t = \tanh(U^g{x_t}+ W^gs_{t-1} + b^g) ,\\
 		&c_t = c_{t-1} \bullet f_t + g_t \bullet i_t ,\\
 		&s_t = \tanh(c_t) \bullet o_t 
 \end{split}
@@ -132,66 +127,99 @@ Different variants of Recurrent Neural Networks (RNNs) have been widely used for
 		The gates mechanism controls how much information from past states and memory is used at the current time step. 
 
 \subsection{Tree-LSTM}
-	The problem with classical LSTM's is that they are linear chain which makes them useless for processing more sophisticated structures than sequences. In particular, many linguistic beings are represented with tree-structure [citation?].
-	In order to process tree-structured data we need to extend the LSTM architecture. In our work we propose Sequential Child-Combination Tree-LSTM.
-	In general, tree-structured Recurrent Neural Networks expand basic RNNs by creating a way to plug in more than one previous state to hidden unit at current time step.
-	[obrazek podłączanie 2 poprzednich stanów do nowego]
-	The essence lie in the way in which the children states are combined with parent state.
-
-\subsection{Child-Sum Tree-LSTM}
-Child-Sum Tree-LSTM equations \cite{tai2015improved}
-
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=0.3\textwidth]{imgs/tree-lstm}
+		\caption{A Tree-LSTM architecture's structure}
+		\label{tab:tree-lstm}
+	\end{center}
+\end{figure}
+	The problem with classical LSTM's is as with the standard RNNs that they are linear chain which makes them useless for processing more sophisticated structures than sequences. In particular, many linguistic beings are represented with tree-structure [citation? jakiś Chomsky czy coś fajnego :D].
+	In order to process tree-structured data we need to extend the LSTM architecture. In case of such structures as trees the model architecture called Tree-LSTM was introduced \cite{tai2015improved}.
+	In general, tree-structured Recurrent Neural Networks expand basic RNNs by creating a way to plug in more than one previous state to hidden unit at given time step as shown at Figure 2.
+	Each unit takes an input $x_j$ and emits label $y_j$ as in standard RNN. However, here each unit can take more than one previous hidden state. Tree-LSTM in particular add the memory to that architecture.
 	
+\subsection{Tree-LSTM label classification}
+		In our case we are dealing with sentences represented as trees. That means each $x_j$ is a word represented as vector called Word Embedding
+		[citation  Mikolov, Tomas; Sutskever, Ilya; Chen, Kai; Corrado, Greg; Dean, Jeffrey (2013). "Distributed Representations of Words and Phrases and their Compositionality". arXiv:1310.4546 Freely accessible [cs.CL].]. If the network unit is a leaf, than its hidden state is an embedding of its word input. If the network unit is not a leaf however, its hidden state represents embedding of entire subtree it represents. That means, if we compute softmax function of that hidden state we will receive label for entire subtree, in our case sentiment label. From it follows that hidden state of root unit is the embedding of entire sentence and its label is the label of entire sentence.\\
+	\indent
+	
+	There can be different types of Tree-LSTM architecture depending on tha way in which child units are incorporated into its parent unit. In our work we show Child-Sum Tree-LSTM architecture \cite{tai2015improved} and present new Sequential-Child-Combination Tree-LSTM architecture.\\
+\subsection{Child-Sum Tree-LSTM}
+
+ For dealing specificly with dependency trees the Child-Sum Tree-LSTM model was presented \cite{tai2015improved}. Its transition equations are the follwing:
+\begin{equation}
+\begin{split}
+&s_{ch}=\sum_{k}s_{ch_k},\\
+&i_j = \sigma(U^ix_j + W^is_{ch} + b^i) ,\\
+&f_{jk} = \sigma(U^fx_j + W^fs_{ch_k} + b^f) ,\\
+&o_j = \sigma(U^ox_j + W^os_{ch} + b^o) ,\\
+&g_j = \tanh(U^gx_j+ W^gs_{ch} + b^g) ,\\
+&c_j = \sum_{k} c_k \bullet f_{jk} + g_{j} \bullet i_{j} ,\\
+&s_j = \tanh({c_{j}}) \bullet o_{j},\\
+\end{split}
+\end{equation}
+	where $k$ is a subscript of $k$-th child of node $j$ and $s_{ch_k}$ is its hidden state.
 \subsection{Sequential-Child-Combination Tree-LSTM}
 
 \begin{figure}[h]
 	 \begin{center}
-    	\includegraphics[width=0.5\textwidth]{sequentialchild}
+    	\includegraphics[width=0.3\textwidth]{imgs/sequentialchild}
 		\caption{Sequentially combining the children with parent}
+		\label{tab:sequentialchild}
 	 \end{center}
 \end{figure}
-	In our work we combine children with its parent as follows:
+	In our work we we propose the Sequential-Child-Combination Tree-LSTM architecture. We combine children with its parent as follows:
 \begin{equation}
 \begin{split}
-&i_{ch_1} = \sigma(U_{x_t}^i + W_{s_{t-1}}^i + b^i) ,\\
-&f_{ch_1} = \sigma(U_{x_t}^f + W_{s_{t-1}}^f + b^f) ,\\
-&o_{ch_1} = \sigma(U_{x_t}^o + W_{s_{t-1}}^o + b^o) ,\\
-&g_{ch_1} = \tanh(U_{x_t}^g+ W_{s_{t-1}}^g + b^g) ,\\
-&c_{ch_1} = c_{t-1} \bullet f_{ch_1} + g_{ch_1} \bullet i_{ch_1} ,\\
-&s_{ch_1} = \tanh({c_{ch_1}}) \bullet o_{ch_1},\\\\
-&i_{ch_2} = \sigma(U_{x_t}^i + W_{ch_1}^i + b^i) ,\\
-&f_{ch_2} = \sigma(U_{x_t}^f + W_{ch_1}^f + b^f) ,\\
-&o_{ch_2} = \sigma(U_{x_t}^o + W_{ch_1}^o + b^o) ,\\
-&g_{ch_2} = \tanh(U_{x_t}^g+ W_{ch_1}^g + b^g) ,\\
-&c_{ch_2} = c_{ch_1} \bullet f_{ch_2} + g_{ch_2} \bullet i_{ch_2} ,\\
-&s_{ch_2} = \tanh(c_{ch_2}) \bullet o_{ch_2},\\\\
+&i_{i_1} = \sigma(U^i{x_t} + W^i{s_{ch_1}} + b^i) ,\\
+&f_{i_1} = \sigma(U^f{x_t} + W^f{s_{ch_1}} + b^f) ,\\
+&o_{i_1} = \sigma(U^o{x_t} + W^o{s_{ch_1}} + b^o) ,\\
+&g_{i_1} = \tanh(U^g{x_t}+ W^g{s_{ch_1}} + b^g) ,\\
+&c_{i_1} = c_{t-1} \bullet f_{i_1} + g_{i_1} \bullet i_{i_1} ,\\
+&s_{i_1} = \tanh({c_{i_1}}) \bullet o_{i_1},\\\\
+&i_{i_2} = \sigma(U^is_{i_1} + W^is_{ch_2} + b^i) ,\\
+&f_{i_2} = \sigma(U^fs_{i_1} + W^fs_{ch_2} + b^f) ,\\
+&o_{i_2} = \sigma(U^os_{i_1} + W^os_{ch_2} + b^o) ,\\
+&g_{i_2} = \tanh(U^gs_{i_1}+ W^gs_{ch_1} + b^g) ,\\
+&c_{i_2} = c_{i_1} \bullet f_{i_2} + g_{i_2} \bullet i_{i_2} ,\\
+&s_{i_2} = \tanh(c_{i_2}) \bullet o_{i_2},\\\\
 &\cdots\\\\
-&i_{ch_n} = \sigma(U_{x_t}^i + W_{ch_{n-1}}^i + b^i) ,\\
-&f_{ch_n} = \sigma(U_{x_t}^f + W_{ch_{n-1}}^f + b^f) ,\\
-&o_{ch_n} = \sigma(U_{x_t}^o + W_{ch_{n-1}}^o + b^o) ,\\
-&g_{ch_n} = \tanh(U_{x_t}^g+ W_{ch_{n-1}}^g + b^g) ,\\
-&c_{ch_n} = c_{ch_n} \bullet f_{ch_n} + g_{ch_n} \bullet i_{ch_n} ,\\
-&s_{ch_n} = \tanh(c_{ch_n}) \bullet o_{ch_n},\\\\
-&s_{t} = s_{ch_n}
+&i_{i_n} = \sigma(U^is_{{n-1}} + W^is_{ch_{n}} + b^i) ,\\
+&f_{i_n} = \sigma(U^fs_{{n-1}} + W^fs_{ch_{n}} + b^f) ,\\
+&o_{i_n} = \sigma(U^os_{{n-1}} + W^os_{ch_{n}} + b^o) ,\\
+&g_{i_n} = \tanh(U^gs_{{n-1}}+ W^gs_{ch_{n}} + b^g) ,\\
+&c_{i_n} = c_{i_{n-1}} \bullet f_{i_n} + g_{i_n} \bullet i_{i_n} ,\\
+&s_{i_n} = \tanh(c_{i_n}) \bullet o_{i_n},\\\\
+&c_{t} = c_{i_n}\\
+&s_{j} = s_{i_n}
 \end{split}
 \end{equation}
-	where $s_{ch_i}$ is an intermediate state after combining with i-th children.\\
-Intuicyjnie, łączymy dzieci z rodzicem od lewej do prawej w taki sposób, że tworzymy pośrednie zanurzenia niosące informację o ojcu uzupełnioną o informację o poddrzewie, którego korzeniem jest dane dziecko.
-Ostateczny stan po połączeniu ze wszystkimi dziećmi tworzy znaczenie całego drzewa.
-Przykład 'Stary rudy kot wlazł na płot'
-mamy kot-stary kot-rudy kot-wlazł
-z tego wychodzi, że stary kot-rudy stary kot-wlazł
-stary rudy kot-wlazł itd.
-można przedstawić taki przykład, żeby pokazać intuicję stojącą za tym sposobem.
+	where $s_{i_k}$ is an intermediate state after combining with $k$-th children. That means, we can see each Tree-LSTM unit as linear LSTM chain dealing with each child respectively. $c$ is a one global memory updated lineary.
+	Pomimo, że w drzewie zależnościowym dzieci nie są ułorzone wg porządku takie działanie pozwala na tworzenie zanurzeń fraz tworzonych z poszczególnych dzieci i zapamiętywanie ich, co nie jest możliwe w przypadku Child-Sum Tree-LSTM. Ponadto, pewien porządek można nadać poprzez branie najpierw dzieci będących wcześniej w szyku zdaniowym. W ten sposób jesteśmy w stanie w potencjalnie głębszy sposób wykorzystać relacje pomiędzy ojcem a poszczególnymi dziećmi niż w przypadku Child-Sum Tree-LSTM.\\
+\indent
+Intuitively, we combine parent with its children in a way that we create intermidiate embeddings by combining child phrases with continuously updated parent phrase. That means we firstly combine parent with its first child which is a subtree with root at that node, then we combine result with next child-subtree and so on. Final state after combining all children creates embedding of entire phrase. This is shown at Fig. \ref{tab:sequentialchild} and example is given at Fig. \ref{tab:niedrazniex}.\\
+\indent
+	Also, it is possible to manage the memory in a different way than presented. We experimented with using separate memory for each unit but eventualy the best results were obtained using the presented method.
+
+%Intuicyjnie, łączymy dzieci z rodzicem od lewej do prawej w taki sposób, że tworzymy pośrednie zanurzenia niosące informację o ojcu uzupełnioną o informację o poddrzewie, którego korzeniem jest dane dziecko.
+%Ostateczny stan po połączeniu ze wszystkimi dziećmi tworzy znaczenie całego drzewa.
+%Przykład 'Stary rudy kot wlazł na płot'
+%mamy kot-stary kot-rudy kot-wlazł
+%z tego wychodzi, że stary kot-rudy stary kot-wlazł
+%stary rudy kot-wlazł itd.
+%można przedstawić taki przykład, żeby pokazać intuicję stojącą za tym sposobem.
 \begin{figure}[h]
 	\begin{center}
-		\includegraphics[width=0.5\textwidth]{staryrudykot}
-		\caption{Przykład}
+		\includegraphics[width=0.5\textwidth]{imgs/niedrazniex}
+		\caption{Example of combining children with its parent.}
+		\label{tab:niedrazniex}
 	\end{center}
 \end{figure}
 	
 \section{Evaluation} 
-
+	We compare our results with mentioned Child-Sum Tree-LSTM, simple linear-chain LSTM and Conditional Random Fields (CRF).  Results are shown in Table \ref{tab:evaluation}.
+	[co z lematyzacją, jak to opisać?]
 \begin{table}[h]
  \begin{center}
 \begin{tabular}{|l|l|}
