@@ -1,4 +1,4 @@
-\begin{thebibliography}{9}
+\begin{thebibliography}{10}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 
 \bibitem[Bengio et~al., 1994]{bengio1994learning}
@@ -33,6 +33,12 @@ Lample, Guillaume, Miguel Ballesteros, Sandeep Subramanian, Kazuya Kawakami,
   and Chris Dyer, 2016.
 \newblock Neural architectures for named entity recognition.
 \newblock {\em arXiv preprint arXiv:1603.01360\/}.
+
+\bibitem[Mikolov et~al., 2013]{mikolov2013distributed}
+Mikolov, Tomas, Ilya Sutskever, Kai Chen, Greg~S Corrado, and Jeff Dean, 2013.
+\newblock Distributed representations of words and phrases and their
+  compositionality.
+\newblock In {\em Advances in neural information processing systems\/}.
 
 \bibitem[Socher et~al., 2013]{socher2013recursive}
 Socher, Richard, Alex Perelygin, Jean Wu, Jason Chuang, Christopher~D Manning,

@@ -12,7 +12,7 @@
 \usepackage{lmodern}
 \usepackage{url}
 \usepackage{graphicx}
-\title{A Sequential Child Combination Tree-LSTM Network for Sentiment Analysis}
+\title{A Sequential Child-Combination Tree-LSTM Network for Sentiment Analysis}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -109,8 +109,8 @@ całym dniu &	0\\
 Different variants of Recurrent Neural Networks (RNNs) have been widely used for many task in natural language processing such named entity recognition \cite{lample2016neural} or text classification \cite{lai2015recurrent}. They can process the arbitrarily long inputs by recurrent application of a transition function over hidden states. The most common form of an RNN transition function is an affine transformation followed by a hyperbolic tangent function:
 	\begin{equation} h_t = tanh(W_{x_t}+U_{h_{t-1}}+b)
 \end{equation}
-	A potential advantage of RNNs in processing natural language stems from their ability to use information gathered sequentially from previous states, such as words or phrases. In theory this makes them capable of tracking a long history of previous states when processing sequences of words. In practice, however, RNNs may they suffer from so-called vanishing gradient problem, which means that during training the gradient can grow or decay exponentially over long sequences \cite{bengio1994learning,hochreiter1998vanishing}. The LSTM architecture \cite{hochreiter1997long} addresses the problem of learning long-term dependencies by introducing a memory cell that is capable of preserving previous state information over relatively long sequences of state. [citation]
-\par There are many different variants of LSTMs, in our work we used following equations:
+	A potential advantage of RNNs in processing natural language stems from their ability to use information gathered sequentially from previous states, such as words or phrases when dealing with current input. In theory this makes them capable of tracking a long history of previous states when processing sequences of words. In practice, however, RNNs may they suffer from so-called vanishing gradient problem, which means that during training the gradient can grow or decay exponentially over long sequences \cite{bengio1994learning,hochreiter1998vanishing}. The LSTM architecture \cite{hochreiter1997long} addresses the problem of learning long-term dependencies by introducing a memory cell that is capable of preserving previous state information over relatively long sequences of state. [citation]
+\par While there are many different types of LSTMs, in our work we used a variant described by the following equations:
 		
 \begin{equation}
 \begin{split}
@@ -126,28 +126,21 @@ Different variants of Recurrent Neural Networks (RNNs) have been widely used for
 		where $x_t$ is input at current time step, $i_t$ is an input gate, $f_t$ a forget gate, $o_t$ an output gate and $c$ stands for LSTM memory.
 		The gates mechanism controls how much information from past states and memory is used at the current time step. 
 
-\subsection{Tree-LSTM}
+\subsection{Tree LSTMs}
 \begin{figure}[h]
 	\begin{center}
 		\includegraphics[width=0.3\textwidth]{imgs/tree-lstm}
-		\caption{A Tree-LSTM architecture's structure}
+		\caption{A Tree LSTM network architecture.}
 		\label{tab:tree-lstm}
 	\end{center}
 \end{figure}
-	The problem with classical LSTM's is as with the standard RNNs that they are linear chain which makes them useless for processing more sophisticated structures than sequences. In particular, many linguistic beings are represented with tree-structure [citation? jakiś Chomsky czy coś fajnego :D].
-	In order to process tree-structured data we need to extend the LSTM architecture. In case of such structures as trees the model architecture called Tree-LSTM was introduced \cite{tai2015improved}.
-	In general, tree-structured Recurrent Neural Networks expand basic RNNs by creating a way to plug in more than one previous state to hidden unit at given time step as shown at Figure 2.
-	Each unit takes an input $x_j$ and emits label $y_j$ as in standard RNN. However, here each unit can take more than one previous hidden state. Tree-LSTM in particular add the memory to that architecture.
+	One problem with applying classical LSTMs in natural language processing is that similarly to standard RNNs, they are linear chains, which makes them difficult to use directly for processing more sophisticated linguistic structures. For example, syntactic annotation which could be useful in predicting more subtle aspects of sentiment of the kind illustrated above usually takes the form of dependency or constituency trees rather then linear sequences of word segments. In order to process tree-structured data the standard LSTM architecture has been elaborated into the so-called Tree LSTMs \cite{tai2015improved}.
+	In general, tree-structured Recurrent Neural Networks expand basic RNNs by creating a way to plug in more than one previous state to hidden unit at given time step as shown in Figure 2. Each neural network unit takes an input $x_j$ and emits label $y_j$ as in a standard RNN. Additionally, however, each such unit can take more than one previous hidden state and Tree-LSTMs in particular also add their memory-handling capacities to this architecture.
 	
-\subsection{Tree-LSTM label classification}
-		In our case we are dealing with sentences represented as trees. That means each $x_j$ is a word represented as vector called Word Embedding
-		[citation  Mikolov, Tomas; Sutskever, Ilya; Chen, Kai; Corrado, Greg; Dean, Jeffrey (2013). "Distributed Representations of Words and Phrases and their Compositionality". arXiv:1310.4546 Freely accessible [cs.CL].]. If the network unit is a leaf, than its hidden state is an embedding of its word input. If the network unit is not a leaf however, its hidden state represents embedding of entire subtree it represents. That means, if we compute softmax function of that hidden state we will receive label for entire subtree, in our case sentiment label. From it follows that hidden state of root unit is the embedding of entire sentence and its label is the label of entire sentence.\\
-	\indent
-	
-	There can be different types of Tree-LSTM architecture depending on tha way in which child units are incorporated into its parent unit. In our work we show Child-Sum Tree-LSTM architecture \cite{tai2015improved} and present new Sequential-Child-Combination Tree-LSTM architecture.\\
-\subsection{Child-Sum Tree-LSTM}
+\subsection{Tree LSTM label classification}
 
- For dealing specificly with dependency trees the Child-Sum Tree-LSTM model was presented \cite{tai2015improved}. Its transition equations are the follwing:
+As already mentioned, in sentiment treebanks, sentences are represented as trees whose (selected) components are also labelled for sentiment. Generally, in a Tree LSTM network used for language processing tasks which can be described as label classification, each sentence component is a unit $x_j$ represented by a distributional vector known as its \textit{word embedding} \cite{mikolov2013distributed}. The hidden states of network units which represent the leaves of a syntactic sentence tree are embeddings of the corresponding words. Network units which represent non-terminal tree nodes, have hidden states representing the embeddings of the entire subtree which they happen to head. By computing an activation function on such hidden states, we obtain a sentiment label of a given entire subtree. From it follows that the hidden state of the root unit is the embedding of entire sentence and its label is the label of the entire sentence.
+\par	Tree LSTM architectures may vary with respect to the exact way in which the child units are incorporated into their respective parents. In this paper we evaluate the so-called Child-Sum Tree-LSTM architecture \cite{tai2015improved} and present a new architecture, which we call  Sequential Child-Combination Tree-LSTM, for syntax-based sentiment analysis. The Child-Sum Tree-LSTM model (ibid.) provides a way of representing dependency syntax relations between parent word nodes and their children and it is based on the following transitions equations:
 \begin{equation}
 \begin{split}
 &s_{ch}=\sum_{k}s_{ch_k},\\
@@ -159,7 +152,7 @@ Different variants of Recurrent Neural Networks (RNNs) have been widely used for
 &s_j = \tanh({c_{j}}) \bullet o_{j},\\
 \end{split}
 \end{equation}
-	where $k$ is a subscript of $k$-th child of node $j$ and $s_{ch_k}$ is its hidden state.
+	where $k$ is a subscript of $k$-th child of node $j$ and $s_{ch_k}$ is its hidden state. There is no arbitrary limit on the branching factor of the syntactic trees to be represented in this architecture. Moreover, as explained by its authors, this model is capable of learning parameters \textit{W\textsuperscript{i}} which `open' the input gate \textit{$i_{j}$} for semantically discriminative content words such as adjectives or verbs and close it for low-information function word inputs such as determiners. 
 \subsection{Sequential-Child-Combination Tree-LSTM}
 
 \begin{figure}[h]
@@ -169,7 +162,7 @@ Different variants of Recurrent Neural Networks (RNNs) have been widely used for
 		\label{tab:sequentialchild}
 	 \end{center}
 \end{figure}
-	In our work we we propose the Sequential-Child-Combination Tree-LSTM architecture. We combine children with its parent as follows:
+	The key innovation proposed in the present paper is what we call the Sequential Child-Combination Tree-LSTM architecture. In order to combine, children nodes with their parents we follow the transition equations specified below:
 \begin{equation}
 \begin{split}
 &i_{i_1} = \sigma(U^i{x_t} + W^i{s_{ch_1}} + b^i) ,\\
@@ -195,11 +188,11 @@ Different variants of Recurrent Neural Networks (RNNs) have been widely used for
 &s_{j} = s_{i_n}
 \end{split}
 \end{equation}
-	where $s_{i_k}$ is an intermediate state after combining with $k$-th children. That means, we can see each Tree-LSTM unit as linear LSTM chain dealing with each child respectively. $c$ is a one global memory updated lineary.
-	Despite the fact that in dependency tree the children are unordered this way of combining them allows for creating the embeddings made of subphrases of particular children and remember that, which is not possible in case of Child-Sum Tree-LSTM. Moreover, same order can be introduced by taking firstly the children that are earlier in sentence order. With that we are able to use the relation between father and particular children in potentially deeper way that with Child-Sum Tree-LSTM.\\
-	%Pomimo, że w drzewie zależnościowym dzieci nie są ułorzone wg porządku takie działanie pozwala na tworzenie zanurzeń fraz tworzonych z poszczególnych dzieci i %zapamiętywanie ich, co nie jest możliwe w przypadku Child-Sum Tree-LSTM. Ponadto, pewien porządek można nadać poprzez branie najpierw dzieci będących wcześniej w %szyku zdaniowym. W ten sposób jesteśmy w stanie w potencjalnie głębszy sposób wykorzystać relacje pomiędzy ojcem a poszczególnymi dziećmi niż w przypadku Child-Sum %Tree-LSTM.\\
+	where $s_{i_k}$ is an intermediate state obtained after combining with its $k$-th child. That means that we can see each Tree-LSTM unit as a linear LSTM chain dealing with each child respectively with $c$ as one global memory updated linearly.
+\par Despite the fact that in dependency tree the children are unordered this way of combining them allows for creating the embeddings made of subphrases of particular children and remember that, which is not possible in case of Child-Sum Tree-LSTM. Moreover, same order can be introduced by taking firstly the children that are earlier in sentence order. With that we are able to use the relation between father and particular children in potentially deeper way that with Child-Sum Tree-LSTM.\\
+	%Pomimo, że w drzewie zależnościowym dzieci nie są ułożone wg porządku takie działanie pozwala na tworzenie zanurzeń fraz tworzonych z poszczególnych dzieci i %zapamiętywanie ich, co nie jest możliwe w przypadku Child-Sum Tree-LSTM. Ponadto, pewien porządek można nadać poprzez branie najpierw dzieci będących wcześniej w %szyku zdaniowym. W ten sposób jesteśmy w stanie w potencjalnie głębszy sposób wykorzystać relacje pomiędzy ojcem a poszczególnymi dziećmi niż w przypadku Child-Sum %Tree-LSTM.\\
 \indent
-Intuitively, we combine parent with its children in a way that we create intermidiate embeddings by combining child phrases with continuously updated parent phrase. That means we firstly combine parent with its first child which is a subtree with root at that node, then we combine result with next child-subtree and so on. Final state after combining all children creates embedding of entire phrase. This is shown at Fig. \ref{tab:sequentialchild} and example is given at Fig. \ref{tab:niedrazniex}.\\
+Intuitively, we combine parent with its children in a way that we create intermediate embeddings by combining child phrases with continuously updated parent phrase. That means we firstly combine parent with its first child which is a subtree with root at that node, then we combine result with next child-subtree and so on. Final state after combining all children creates embedding of entire phrase. This is shown at Fig. \ref{tab:sequentialchild} and example is given at Fig. \ref{tab:niedrazniex}.\\
 \indent
 	Also, it is possible to manage the memory in a different way than presented. We experimented with using separate memory for each unit but eventualy the best results were obtained using the presented method.
 
@@ -261,6 +254,8 @@ The source code of the system described in this paper, together with the trained
 %\nocite{*}
 
 \section{Acknowledgments}
+
+Research described in this paper was funded by XXX.
 
 \bibliographystyle{ltc05}
 \bibliography{sal} 
