@@ -1,4 +1,4 @@
-\begin{thebibliography}{10}
+\begin{thebibliography}{11}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 
 \bibitem[Bengio et~al., 1994]{bengio1994learning}
@@ -22,6 +22,11 @@ Hochreiter, Sepp, 1998.
 Hochreiter, Sepp and J{\"u}rgen Schmidhuber, 1997.
 \newblock Long short-term memory.
 \newblock {\em Neural computation\/}, 9(8):1735--1780.
+
+\bibitem[Lafferty et~al., 2001]{lafferty2001conditional}
+Lafferty, John, Andrew McCallum, and Fernando~CN Pereira, 2001.
+\newblock Conditional random fields: Probabilistic models for segmenting and
+  labeling sequence data.
 
 \bibitem[Lai et~al., 2015]{lai2015recurrent}
 Lai, Siwei, Liheng Xu, Kang Liu, and Jun Zhao, 2015.
