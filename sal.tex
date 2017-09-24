@@ -82,7 +82,7 @@ The dataset released in the PolEval competition for the task described in this p
 
 \hline
  Word &	Polarity\\
-      \hline
+      \hline \hline
      Nie &	0\\
      \hline
 Nie drażni nawet po całym dniu	 . & 1\\
@@ -109,7 +109,7 @@ całym dniu &	0\\
 Different variants of Recurrent Neural Networks (RNNs) have been widely used for many task in natural language processing such named entity recognition \cite{lample2016neural} or text classification \cite{lai2015recurrent}. They can process the arbitrarily long inputs by recurrent application of a transition function over hidden states. The most common form of an RNN transition function is an affine transformation followed by a hyperbolic tangent function:
 	\begin{equation} h_t = tanh(W_{x_t}+U_{h_{t-1}}+b)
 \end{equation}
-	A potential advantage of RNNs in processing natural language stems from their ability to use information gathered sequentially from previous states, such as words or phrases when dealing with current input. In theory this makes them capable of tracking a long history of previous states when processing sequences of words. In practice, however, RNNs may they suffer from so-called vanishing gradient problem, which means that during training the gradient can grow or decay exponentially over long sequences \cite{bengio1994learning,hochreiter1998vanishing}. The LSTM architecture \cite{hochreiter1997long} addresses the problem of learning long-term dependencies by introducing a memory cell that is capable of preserving previous state information over relatively long sequences of state. [citation]
+	A potential advantage of RNNs in processing natural language stems from their ability to use information gathered sequentially from previous states, such as words or phrases when dealing with current input. In theory this makes them capable of tracking a long history of previous states when processing sequences of words. In practice, however, RNNs may they suffer from so-called vanishing gradient problem, which means that during training the gradient can grow or decay exponentially over long sequences \cite{bengio1994learning,hochreiter1998vanishing}. The LSTM architecture \cite{hochreiter1997long} addresses the problem of learning long-term dependencies by introducing a memory cell that is capable of preserving previous state information over relatively long sequences of states.
 \par While there are many different types of LSTMs, in our work we used a variant described by the following equations:
 		
 \begin{equation}
@@ -158,11 +158,11 @@ As already mentioned, in sentiment treebanks, sentences are represented as trees
 \begin{figure}[h]
 	 \begin{center}
     	\includegraphics[width=0.3\textwidth]{imgs/sequentialchild}
-		\caption{Sequentially combining the children with parent}
+		\caption{Sequentially combining children with their parents in an LSTM network.}
 		\label{tab:sequentialchild}
 	 \end{center}
 \end{figure}
-	The key innovation proposed in the present paper is what we call the Sequential Child-Combination Tree-LSTM architecture. In order to combine, children nodes with their parents we follow the transition equations specified below:
+	The key contribution to LSTM-based models for sentiment analysis proposed in the present paper is what we call a Sequential Child-Combination Tree-LSTM architecture. Formally, in order to combine, children nodes with their parents, we follow the transition equations specified below:
 \begin{equation}
 \begin{split}
 &i_{i_1} = \sigma(U^i{x_t} + W^i{s_{ch_1}} + b^i) ,\\
@@ -188,25 +188,18 @@ As already mentioned, in sentiment treebanks, sentences are represented as trees
 &s_{j} = s_{i_n}
 \end{split}
 \end{equation}
-	where $s_{i_k}$ is an intermediate state obtained after combining with its $k$-th child. That means that we can see each Tree-LSTM unit as a linear LSTM chain dealing with each child respectively with $c$ as one global memory updated linearly.
-\par Despite the fact that in dependency tree the children are unordered this way of combining them allows for creating the embeddings made of subphrases of particular children and remember that, which is not possible in case of Child-Sum Tree-LSTM. Moreover, same order can be introduced by taking firstly the children that are earlier in sentence order. With that we are able to use the relation between father and particular children in potentially deeper way that with Child-Sum Tree-LSTM.\\
-	%Pomimo, że w drzewie zależnościowym dzieci nie są ułożone wg porządku takie działanie pozwala na tworzenie zanurzeń fraz tworzonych z poszczególnych dzieci i %zapamiętywanie ich, co nie jest możliwe w przypadku Child-Sum Tree-LSTM. Ponadto, pewien porządek można nadać poprzez branie najpierw dzieci będących wcześniej w %szyku zdaniowym. W ten sposób jesteśmy w stanie w potencjalnie głębszy sposób wykorzystać relacje pomiędzy ojcem a poszczególnymi dziećmi niż w przypadku Child-Sum %Tree-LSTM.\\
-\indent
-Intuitively, we combine parent with its children in a way that we create intermediate embeddings by combining child phrases with continuously updated parent phrase. That means we firstly combine parent with its first child which is a subtree with root at that node, then we combine result with next child-subtree and so on. Final state after combining all children creates embedding of entire phrase. This is shown at Fig. \ref{tab:sequentialchild} and example is given at Fig. \ref{tab:niedrazniex}.\\
-\indent
-	Also, it is possible to manage the memory in a different way than presented. We experimented with using separate memory for each unit but eventualy the best results were obtained using the presented method.
+	where $s_{i_k}$ is an intermediate state obtained after combining with its $k$-th child. That means that we can see each Tree-LSTM unit as a linear LSTM chain representing each child respectively with $c$ as one global, linearly updated memory.
+\par Even though dependency trees do not explicitly encode word order information, the proposed method of combining them allows for creating embeddings composed of subphrases or single word dependents of particular children and indirectly `remember' them in the learning process, which is not directly possible in case of the Child-Sum Tree-LSTM architecture. Moreover, word order information can be preserved in our model by combining first the children that occur earlier in the sentence. The intuition behind this approach is to provide a mechanism of encoding  the relations between the parent and its particular children which is potentially more subtle and more discriminative than the Child-Sum Tree-LSTM model.
+%Pomimo, że w drzewie zależnościowym dzieci nie są ułożone wg porządku takie działanie pozwala na tworzenie zanurzeń fraz tworzonych z poszczególnych dzieci i %zapamiętywanie ich, co nie jest możliwe w przypadku Child-Sum Tree-LSTM. Ponadto, pewien porządek można nadać poprzez branie najpierw dzieci będących wcześniej w %szyku zdaniowym. W ten sposób jesteśmy w stanie w potencjalnie głębszy sposób wykorzystać relacje pomiędzy ojcem a poszczególnymi dziećmi niż w przypadku Child-Sum %Tree-LSTM.\\
+To phrase it differently, we combine parents with their children from left to right by combining the intermediate embeddings of the roots of child phrases with the current parent phrase. The final result of this process is a compositional embedding of an entire sentence. This process is further illustrated in Fig. \ref{tab:sequentialchild} and in Fig. \ref{tab:niedrazniex}, where it is applied to the example sentence from the PolEval sentiment treebank introduced above. Although it is possible to manage the memory of such a network model in a different way, for example by using a separate memory for each unit, our best results were obtained using the single global memory presented here.
 
 %Intuicyjnie, łączymy dzieci z rodzicem od lewej do prawej w taki sposób, że tworzymy pośrednie zanurzenia niosące informację o ojcu uzupełnioną o informację o poddrzewie, którego korzeniem jest dane dziecko.
 %Ostateczny stan po połączeniu ze wszystkimi dziećmi tworzy znaczenie całego drzewa.
-%Przykład 'Stary rudy kot wlazł na płot'
-%mamy kot-stary kot-rudy kot-wlazł
-%z tego wychodzi, że stary kot-rudy stary kot-wlazł
-%stary rudy kot-wlazł itd.
-%można przedstawić taki przykład, żeby pokazać intuicję stojącą za tym sposobem.
+
 \begin{figure}[h]
 	\begin{center}
 		\includegraphics[width=0.5\textwidth]{imgs/niedrazniex}
-		\caption{Example of combining children with its parent.}
+		\caption{An example of combining dependent phrases with their parent in the Sequential Child-Combination Tree-LSTM model.}
 		\label{tab:niedrazniex}
 	\end{center}
 \end{figure}
