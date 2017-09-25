@@ -34,7 +34,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\abstract{This paper describes a sentiment analysis model based on tree-structured long short-term memory neural networks. As a potential improvement over currently used approaches, we propose a sequential mechanism of combining LSTM network units representing syntactic dependencies, which provides an alternative way of preserving the compositionality of parent phrases as combinations of their syntactic dependents. We train and evaluate our system on the datasets available in the PolEval 2017 competition. Our best result obtained with the proposed approach on these datasets outperforms both basic, linearly combined and some tree-structured LSTM models.}
+\abstract{This paper describes a sentiment analysis model based on tree-structured long short-term memory neural networks. As a potential improvement over currently used approaches, we propose a sequential mechanism of combining LSTM network units representing syntactic dependencies, which provides an alternative way of preserving the compositionality of parent phrases as combinations of their syntactic dependents. We train and evaluate our system on the datasets available in the PolEval 2017 competition. Our best result obtained with the proposed approach on these datasets outperforms both basic, linearly combined LSTM and some tree-structured variants of such models.}
 
 \begin{document}
 
@@ -205,8 +205,7 @@ To phrase it differently, we combine parents with their children from left to ri
 \end{figure}
 	
 \section{Evaluation} 
-	The model proposed in this paper was evaluated on the held-out test set provided in the PolEval 2017 competition. As baselines, we used a simple, linearly chained LSTM network, Conditional Random Fields \cite{lafferty2001conditional} with rather standard contextual and word-shape features as well as the Child-Sum Tree LSTM model mentioned above. Additionally, we ran some of these classifiers on lemmatized versions of the syntactically annotated sentences in the test set. The best result obtained in the single-blind evaluation stage of the PolEval competition was 
-approx. 76,8\% accuracy of sentiment labels assignments.  In Table \ref{tab:evaluation} we report the best results obtained on the same test set with a modification of our originally submitted system, which involved [EXPLAIN]. Incidentally, it is interesting to note that the improvement we observed by lemmatizing the word tokens in the provided sentence representations was consistent across the approaches we tested.
+	The model proposed in this paper was evaluated on the held-out test set provided in the PolEval 2017 competition. As baselines, we used a simple, linearly chained LSTM network, Conditional Random Fields \cite{lafferty2001conditional} with rather standard contextual and word-shape features as well as the Child-Sum Tree LSTM model mentioned above. The result submitted to the single-blind evaluation stage of the PolEval competition was approx. 76,80\% accuracy of sentiment labels assignments. In Table \ref{tab:evaluation} we report the best results obtained on the same test set with a modification of our originally submitted system, which involved lemmatizing the word tokens in the training and test sentences. After this modification, our approach seems to have slightly outperformed the Child-Sum Tree model on the PolEval test set. It is interesting to note that some improvement resulting from lemmatization was consistent across the different approaches we tested.
 \begin{table}[h]
  \begin{center}
 \begin{tabular}{|l|l|}
@@ -221,10 +220,10 @@ approx. 76,8\% accuracy of sentiment labels assignments.  In Table \ref{tab:eval
       \hline
       Lemmatized CRF & 75,63\%\\
       \hline
-      Child-Sum Tree-LSTM &  78,40\%\\
+      Child-Sum Tree-LSTM &  77,69\%\\
       \hline
       Sequential Child-Combination & \\
-      Tree-LSTM & 78,56\%\\
+      Tree-LSTM & \textbf{76,80}\%\\
       \hline
       Lemmatized Child-Sum Tree-LSTM & 79,35\%\\
       \hline
