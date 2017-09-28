@@ -20,12 +20,12 @@
 %!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 % PLEASE DO NOT WRITE YOUR NAME AND ADDRESS IN THE DRAFT OF YOUR PAPER
 % SIMPLY ERASE THE LINES...
-%\name{Michał Lew$^{\dagger}$\\ \bf \large Piotr Pęzik$^{\ast}$} 
+\name{Michał Lew$^{\dagger}$\\ \bf \large Piotr Pęzik$^{\ast}$} 
 
-%\address{ $^{\dagger}$VoiceLab \\	
-   %            michal.lew@voicelab.pl \\ \\
-      %         $^{\ast}$University of Lodz \\ 
-         %      piotr.pezik@uni.lodz.pl}
+\address{ $^{\dagger}$VoiceLab \\	
+               michal.lew@voicelab.pl \\ \\
+               $^{\ast}$Piotr Pęzik \\ 
+               piotr.pezik@voicelab.pl}
 
 %% ... UP TO HERE
 % ... UP TO HERE
@@ -34,7 +34,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\abstract{This paper describes a sentiment analysis model based on tree-structured long short-term memory (LSTM) neural networks. As a potential improvement over currently used approaches, we propose a sequential mechanism of combining network units representing syntactic dependencies, which provides an alternative way of preserving the compositionality of parent phrases as combinations of their syntactic dependents. We train and evaluate our system on a datasets made available in the PolEval 2017 competition. Our best result obtained with the proposed approach outperforms both basic, linearly combined LSTMs and a related tree-structured variant of such networks.}
+\abstract{This paper describes a sentiment analysis model based on tree-structured long short-term memory (LSTM) neural networks. As a potential improvement over currently used approaches, we propose a sequential mechanism of combining network units representing syntactic dependencies, which provides an alternative way of preserving the compositionality of parent phrases as combinations of their syntactic dependents. We train and evaluate our system on a datasets provided in the PolEval 2017 competition. Our best result obtained with the proposed approach outperforms both basic, linearly combined LSTMs and a related tree-structured variant of such networks.}
 
 \begin{document}
 
@@ -243,13 +243,13 @@ To phrase it differently, we combine parents with their children from left to ri
 In the present paper we described a Sequential Child-Combination Tree-LSTM model for the task of syntax-based sentiment analysis in Polish. The theoretical motivation behind this model was to provide a relatively robust mechanism of considering syntactic relations between words and phrases in natural language sentences as a potentially relevant feature in sentiment detection. In particular, we proposed a mechanism of compositionally generating governor or parent-phrase embeddings from the embeddings of their dependent phrases, which preserves some of the compositionality of the latter type of units. The results obtained for the PolEval 2017 test set were promising, but given the rather limited size of these datasets, it would be necessary to run similar comparisons on larger sentiment treebanks, in order to validate the proposed approach of tracking the syntactic and semantic compositionality of sentences in SA. The method described in this paper can be applied to dependency-parsed data in other languages, possibly also in other tasks, such as measuring the semantic relatedness of sentence pairs, where syntax-driven deep learning approaches proved to be particularly successful \cite{tai2015improved}.
 \section{Availability}
 
-The source code of the system described in this paper, together with its trained models are available at \url{https://github.com/ANONYMIZED}.
+The source code of the system described in this paper, together with its trained models are available at \url{https://github.com/michal-lew/tree-lstm}.
 
 %\nocite{*}
 
 \section{Acknowledgments}
 
-Research described in this paper was funded by XXX.
+Research described in this paper was funded by a subsidy the Polish Industrial Development Agency no. RPPM.01.01.01-22-0026/16.
 
 \bibliographystyle{ltc05}
 \bibliography{sal} 
