@@ -109,7 +109,7 @@ całym dniu &	0\\
 Different variants of Recurrent Neural Networks (RNNs) have been widely used for many task in natural language processing such named entity recognition \cite{lample2016neural} or text classification \cite{lai2015recurrent}. RNNs can process arbitrarily long inputs by recurrent application of a transition function over hidden states. The most common form of an RNN transition function is an affine transformation followed by a hyperbolic tangent function:
 	\begin{equation} h_t = tanh(W_{x_t}+U_{h_{t-1}}+b)
 \end{equation}
-	A potential advantage of RNNs in processing natural language stems from their ability to use information gathered sequentially from previous states, corresponding to units of language such as words or phrases when dealing with current input. In theory this makes them capable of tracking a long history of previous states when processing sequences of words. In practice, however, RNNs may they suffer from so-called vanishing gradient problem, which means that during training the gradient can grow or decay exponentially over long sequences \cite{bengio1994learning,hochreiter1998vanishing}. The LSTM architecture \cite{hochreiter1997long} addresses the problem of learning long-term dependencies by introducing a memory cell that is capable of preserving previous state information over relatively long sequences of states.
+	A potential advantage of RNNs in processing natural language stems from their ability to use information gathered sequentially from previous states, corresponding to units of language such as words or phrases when dealing with current input. In theory this makes them capable of tracking a long history of previous states when processing sequences of words. In practice, however, RNNs may they suffer from the so-called vanishing gradient problem, which means that during training the gradient can grow or decay exponentially over long sequences \cite{bengio1994learning,hochreiter1998vanishing}. The LSTM architecture \cite{hochreiter1997long} addresses the problem of learning long-term dependencies by introducing a memory cell that is capable of preserving previous state information over relatively long sequences of states.
 \par While there are many different types of LSTMs, in our work we used a variant described by the following equations:
 		
 \begin{equation}
@@ -135,7 +135,7 @@ Different variants of Recurrent Neural Networks (RNNs) have been widely used for
 	\end{center}
 \end{figure}
 	One problem with applying classical LSTMs in natural language processing is that similarly to standard RNNs, they are linear chains, which makes them difficult to use directly for processing more sophisticated linguistic structures. For example, syntactic annotation which could be useful in predicting more subtle aspects of sentiment of the kind illustrated above usually takes the form of hierarchically-structured dependency or constituency trees rather then linear sequences of word segments. In order to process tree-structured data, the standard LSTM architecture has been elaborated into the so-called Tree LSTMs \cite{tai2015improved}.
-	In general, Tree-Structured Recurrent Neural Networks expand basic RNNs by creating a way to plug in more than one previous state to hidden unit at given time step as shown in Figure 2. Each neural network unit takes an input $x_j$ and emits a label $y_j$ as in a standard RNN. Additionally, however, each such unit can take more than one previous hidden state. Tree-LSTMs also add their memory-handling capacities to this elaborated architecture.
+	In general, Tree-Structured Recurrent Neural Networks expand basic RNNs by creating a way to plug in more than one previous state to a hidden unit at given time step as shown in Figure 2. Each neural network unit takes an input $x_j$ and emits a label $y_j$ as in a standard RNN. Additionally, however, each such unit can take more than one previous hidden state. Tree-LSTMs also add their memory-handling capacities to this elaborated architecture.
 	
 \subsection{Tree LSTM label classification}
 
@@ -249,7 +249,11 @@ The source code of the system described in this paper, together with its trained
 
 \section{Acknowledgments}
 
-Research described in this paper was funded by a subsidy the Polish Industrial Development Agency no. RPPM.01.01.01-22-0026/16.
+Research described in this paper was carreid out within grant funded
+by the European Union Regional Operation Program for
+the Pomeranian Voivodship for the years 2014-2020 based on
+the Resolution no 190/214/17 of the Pomeranian Voivodship
+Board, project RPPM.01.01.01-22-0026/16.
 
 \bibliographystyle{ltc05}
 \bibliography{sal} 
